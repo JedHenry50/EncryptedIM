@@ -58,10 +58,14 @@ def parseArgs():
 #
 # note that you MUST convert confkey and authkey to ascii encoding,
 # e.g., confkey_as_bytes = bytes(confkey,'ascii')
-def hashKeys( confkey, authkey):
+def hashKeys(confkey, authkey):
     # insert code to compute two hashes here
-    confkeyHash = bytes([0x01,0x02])
-    authkeyHash = bytes([0x99,0x22,0x33])
+    confkeyHash = bytes(confkey, 'ascii')
+    authkeyHash = bytes(authkey, 'ascii')
+
+    confkeyHash = SHA256.new(confkeyHash).digest()
+    authkeyHash = SHA256.new(authkeyHash).digest()
+    
     return confkeyHash,authkeyHash
 
 
